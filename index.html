@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FuerteEnCristo | Cuida tu Templo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+        
+        :root {
+            --primary: 30 58 138;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', sans-serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&amp;w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: rgb(234 179 8);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .bible-quote {
+            border-left: 4px solid rgb(234 179 8);
+        }
+    </style>
+</head>
+<body class="tail-container bg-[#F9FAFB] text-gray-800 overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-blue-950 rounded-2xl flex items-center justify-center text-amber-300">
+                        <i class="fa-solid fa-dumbbell text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="heading-font text-2xl font-bold tracking-tight text-blue-950">FuerteEnCristo</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#senderos" onclick="smoothScrollTo('senderos')" class="nav-link text-gray-600 hover:text-blue-950">Senderos</a>
+                    <a href="#caracteristicas" onclick="smoothScrollTo('caracteristicas')" class="nav-link text-gray-600 hover:text-blue-950">Características</a>
+                    <a href="#testimonios" onclick="smoothScrollTo('testimonios')" class="nav-link text-gray-600 hover:text-blue-950">Testimonios</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                             <!-- Botón Iniciar Sesión actualizado -->
+                    <a href="https://fuerteencristo.netlify.app/" target="_blank"
+                       class="px-5 py-2 text-sm font-semibold text-blue-950 hover:bg-gray-100 rounded-3xl transition-colors">
+                        Iniciar Sesión
+                    </a>
+                    
+                    <button onclick="goToWhatsApp()" 
+                            class="px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white text-sm font-semibold rounded-3xl flex items-center gap-x-2 transition-all duration-300">
+                        <span>Comenzar Gratis</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                        class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-gray-700">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-6 py-6 flex flex-col gap-y-4 text-base">
+                <a href="#senderos" onclick="toggleMobileMenu()" class="font-medium text-gray-700">Senderos</a>
+                <a href="#caracteristicas" onclick="toggleMobileMenu()" class="font-medium text-gray-700">Características</a>
+                <a href="#testimonios" onclick="toggleMobileMenu()" class="font-medium text-gray-700">Testimonios</a>
+                <div class="pt-4 border-t">
+                    <button onclick="toggleMobileMenu();showLoginModal()" 
+                            class="w-full py-3 text-blue-950 font-semibold">Iniciar Sesión</button>
+                    <button onclick="toggleMobileMenu();scrollToCTA()" 
+                            class="w-full mt-3 py-3 bg-blue-950 text-white font-semibold rounded-3xl">Comenzar Gratis</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg h-screen flex items-center text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md px-5 py-2 rounded-3xl mb-8">
+                <span class="text-amber-300">✝️</span>
+                <span class="text-sm font-medium tracking-widest">1 Corintios 6:19-20</span>
+            </div>
+            
+            <h1 class="heading-font text-6xl md:text-7xl leading-none font-bold tracking-tighter mb-6">
+                TU CUERPO ES<br>EL TEMPLO DEL<br>ESPÍRITU SANTO
+            </h1>
+            
+            <p class="max-w-lg mx-auto text-xl md:text-2xl text-white/90 mb-10">
+                Entrenamiento en casa que fortalece tu cuerpo y tu fe. 
+                Rutinas guiadas + Palabras de Fe cada día.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="scrollToCTA()" 
+                        class="group px-10 py-5 bg-amber-400 hover:bg-amber-300 transition-all duration-300 text-blue-950 text-xl font-semibold rounded-3xl flex items-center justify-center gap-x-3 shadow-xl shadow-amber-500/30 w-full sm:w-auto">
+                    <span>Comienza a Cuidar tu Templo Hoy</span>
+                    <i class="fa-solid fa-arrow-right group-active:rotate-45 transition-transform"></i>
+                </button>
+                
+                <button onclick="document.getElementById('senderos').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-8 py-5 border border-white/70 hover:bg-white/10 transition-all text-lg font-medium rounded-3xl">
+                    Ver los Senderos
+                </button>
+            </div>
+            
+            <div class="mt-16 flex justify-center gap-x-8 text-sm">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-amber-300"></i>
+                    <span>Sin equipo</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-amber-300"></i>
+                    <span>En casa</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-amber-300"></i>
+                    <span>Con Cristo</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filosofía Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 text-sm font-medium rounded-3xl">EL TEMPLO DEL ESPÍRITU</span>
+                    <h2 class="heading-font text-5xl font-bold text-blue-950 mt-6 leading-tight">
+                        No solo entrenas tu cuerpo.<br>Fortalece tu espíritu.
+                    </h2>
+                    <div class="mt-8 space-y-8">
+                        <div class="bible-quote pl-6">
+                            <p class="italic text-lg text-gray-700">"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros, el cual tenéis de Dios, y que no sois vuestros?"</p>
+                            <p class="text-sm mt-3 text-amber-700 font-medium">— 1 Corintios 6:19</p>
+                        </div>
+                        
+                        <p class="text-gray-600 leading-relaxed text-lg">
+                            FuerteEnCristo une la disciplina del ejercicio con la verdad eterna de la Palabra de Dios. 
+                            Cada sesión termina con una reflexión poderosa que alimenta tu alma mientras transformas tu físico.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&amp;w=2070" 
+                         alt="Oración y ejercicio" 
+                         class="rounded-3xl shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl max-w-[220px]">
+                        <div class="flex gap-x-4">
+                            <div class="text-4xl">🙏</div>
+                            <div>
+                                <p class="font-medium">Palabra del día</p>
+                                <p class="text-sm text-gray-500 mt-1">"El que persevera hasta el fin, éste será salvo." — Mateo 24:13</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Senderos Section -->
+    <section id="senderos" class="py-24 bg-[#F9FAFB]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-medium">ENCUENTRA TU CAMINO</span>
+                <h2 class="heading-font text-5xl font-bold text-blue-950 mt-3">Elige tu Sendero</h2>
+                <p class="mt-4 text-gray-600 max-w-md mx-auto">Cuatro niveles pensados para diferentes etapas de tu vida y condición física.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Sendero 1 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-seedling text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-blue-950">Suave</h3>
+                    <p class="text-amber-600 text-sm mt-1 font-medium">Principiantes</p>
+                    <p class="mt-6 text-gray-600 leading-relaxed">
+                        Rutinas suaves para quienes recién comienzan. Movimientos básicos, enfoque en la forma y mucha gracia.
+                    </p>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-500"></i> Baja intensidad</li>
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-500"></i> 15-20 minutos</li>
+                    </ul>
+                </div>
+                
+                <!-- Sendero 2 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-person-walking text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-blue-950">Rodillas</h3>
+                    <p class="text-amber-600 text-sm mt-1 font-medium">Movilidad y cuidado</p>
+                    <p class="mt-6 text-gray-600 leading-relaxed">
+                        Especialmente diseñado para proteger articulaciones. Fortalecimiento suave con énfasis en estabilidad.
+                    </p>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-blue-500"></i> Amigable con rodillas</li>
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-blue-500"></i> Enfoque en movilidad</li>
+                    </ul>
+                </div>
+                
+                <!-- Sendero 3 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-dumbbell text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-blue-950">Fuerza</h3>
+                    <p class="text-amber-600 text-sm mt-1 font-medium">Construye músculo</p>
+                    <p class="mt-6 text-gray-600 leading-relaxed">
+                        Entrenamientos que aumentan tu fuerza y energía diaria. Ideal para quienes quieren resultados visibles.
+                    </p>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-amber-500"></i> Fuerza funcional</li>
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-amber-500"></i> 25-35 minutos</li>
+                    </ul>
+                </div>
+                
+                <!-- Sendero 4 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100 relative">
+                    <div class="absolute top-6 right-6 bg-gradient-to-br from-amber-400 to-yellow-500 text-white text-xs font-bold px-4 py-1 rounded-3xl">MÁS POPULAR</div>
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-fire-flame-curved text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-blue-950">Legendario</h3>
+                    <p class="text-amber-600 text-sm mt-1 font-medium">Desafío diario</p>
+                    <p class="mt-6 text-gray-600 leading-relaxed">
+                        Para quienes buscan romper límites. Entrenamientos avanzados que te llevarán a un nuevo nivel de fortaleza.
+                    </p>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-red-500"></i> Alta intensidad</li>
+                        <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-red-500"></i> Progreso constante</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section id="caracteristicas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-5xl font-bold text-blue-950">Diseñada para tu vida real</h2>
+                <p class="mt-4 text-xl text-gray-600">Todo lo que necesitas para ser consistente</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 border border-gray-100 rounded-3xl p-10 hover:border-amber-200 transition-colors">
+                    <div class="w-14 h-14 bg-white shadow flex items-center justify-center rounded-2xl mb-8">
+                        <i class="fa-solid fa-play text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold">Rutinas en casa</h3>
+                    <p class="mt-4 text-gray-600">Videos claros, conteo manual. Sin gimnasio, sin excusas.</p>
+                </div>
+                
+                <div class="bg-gray-50 border border-gray-100 rounded-3xl p-10 hover:border-amber-200 transition-colors">
+                    <div class="w-14 h-14 bg-white shadow flex items-center justify-center rounded-2xl mb-8">
+                        <i class="fa-solid fa-book-bible text-3xl text-amber-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold">Palabras de Fe</h3>
+                    <p class="mt-4 text-gray-600">Cada día una cita bíblica inspiradora con una breve reflexión para meditar mientras entrenas.</p>
+                </div>
+                
+                <div class="bg-gray-50 border border-gray-100 rounded-3xl p-10 hover:border-amber-200 transition-colors">
+                    <div class="w-14 h-14 bg-white shadow flex items-center justify-center rounded-2xl mb-8">
+                        <i class="fa-solid fa-cloud text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold">Progreso en la Nube</h3>
+                    <p class="mt-4 text-gray-600">Sincronización automática con Firebase. Nunca pierdas tu racha. Estadísticas y seguimiento espiritual.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios 
+    <section id="testimonios" class="py-24 bg-[#F9FAFB]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-5xl font-bold text-blue-950">Hermanos que ya están caminando</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonio 1
+                <div class="bg-white p-8 rounded-3xl">
+                    <div class="flex gap-x-1 text-amber-400 mb-6">
+                        ★★★★☆
+                    </div>
+                    <p class="italic text-gray-700">"Llevo 47 días consecutivos. Mi energía cambió completamente y mis mañanas ahora empiezan con oración y movimiento. ¡Gracias FuerteEnCristo!"</p>
+                    <div class="mt-8 flex items-center gap-x-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="font-medium">Hermano Carlos M.</p>
+                            <p class="text-xs text-gray-500">Medellín, Colombia</p>
+                        </div>
+                    </div>
+                </div>
+                
+                 Testimonio 2
+                <div class="bg-white p-8 rounded-3xl">
+                    <div class="flex gap-x-1 text-amber-400 mb-6">
+                        ★★★★★
+                    </div>
+                    <p class="italic text-gray-700">"Después de dos partos, el sendero 'Rodillas' me ayudó a recuperar fuerza sin dolor. La parte espiritual es lo que más me motiva cada día."</p>
+                    <div class="mt-8 flex items-center gap-x-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="font-medium">Hermana Laura V.</p>
+                            <p class="text-xs text-gray-500">Lima, Perú</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonio 3 
+                <div class="bg-white p-8 rounded-3xl">
+                    <div class="flex gap-x-1 text-amber-400 mb-6">
+                        ★★★★★
+                    </div>
+                    <p class="italic text-gray-700">"Pasé del Sendero Suave al Legendario en 4 meses. Mi cuerpo y mi relación con Dios nunca habían estado tan fuertes."</p>
+                    <div class="mt-8 flex items-center gap-x-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="font-medium">Hermano David R.</p>
+                            <p class="text-xs text-gray-500">Buenos Aires, Argentina</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- CTA Final -->
+    <section class="py-20 bg-blue-950 text-white">
+        <div class="max-w-3xl mx-auto text-center px-6">
+            <h2 class="heading-font text-5xl font-bold mb-6">¿Estás listo para honrar a Dios con tu cuerpo?</h2>
+            <p class="text-xl text-blue-200 mb-10">Crea tu cuenta gratuita hoy. Primeros 3 días sin compromiso.</p>
+            
+            <button onclick="goToWhatsApp()" 
+                    class="px-12 py-6 bg-amber-400 hover:bg-amber-300 transition-all text-blue-950 text-2xl font-bold rounded-3xl shadow-2xl shadow-blue-950/50">
+                SÍ, QUIERO EMPEZAR
+            </button>
+            
+            <p class="text-blue-300 text-sm mt-8">Se parte del ejercito de Dios.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-10">
+                <div>
+                    <div class="flex items-center gap-x-3 mb-6">
+                        <div class="w-8 h-8 bg-blue-950 rounded-2xl flex items-center justify-center text-amber-300 text-xl">
+                            ✝️
+                        </div>
+                        <span class="heading-font text-2xl font-bold">FuerteEnCristo</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">Fortalece tu templo. Glorifica a Dios.</p>
+                </div>
+                
+                <div>
+                    <p class="font-semibold mb-4">Producto</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-950">Senderos</a></li>
+                        <li><a href="#" class="hover:text-blue-950">Precios</a></li>
+                        <li><a href="#" class="hover:text-blue-950">Comunidad</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <p class="font-semibold mb-4">Compañía</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-950">Sobre nosotros</a></li>
+                        <li><a href="#" class="hover:text-blue-950">Blog</a></li>
+                        <li><a href="#" class="hover:text-blue-950">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <p class="font-semibold mb-4">Legal</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-950">Privacidad</a></li>
+                        <li><a href="#" class="hover:text-blue-950">Términos</a></li>
+                    </ul>
+                    <div class="mt-8 text-xs text-gray-400">
+                        Hecho con ❤️ para la gloria de Dios
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t mt-16 pt-8 text-center text-xs text-gray-400">
+                © 2026 FuerteEnCristo. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold">Bienvenido de nuevo</h3>
+                <button onclick="hideLoginModal()" class="text-3xl leading-none text-gray-300 hover:text-gray-500">×</button>
+            </div>
+            <div class="space-y-6">
+                <input type="email" placeholder="Correo electrónico" 
+                       class="w-full px-6 py-4 border border-gray-200 rounded-3xl focus:outline-none focus:border-blue-300">
+                <input type="password" placeholder="Contraseña" 
+                       class="w-full px-6 py-4 border border-gray-200 rounded-3xl focus:outline-none focus:border-blue-300">
+                <button onclick="fakeLogin()" 
+                        class="w-full py-5 bg-blue-950 text-white rounded-3xl font-semibold">Entrar a mi cuenta</button>
+            </div>
+            <p onclick="hideLoginModal()" class="text-center text-sm text-gray-500 mt-8 cursor-pointer">Cerrar</p>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded via CDN
+        
+        // Initialize Lucide icons
+        function initIcons() {
+            lucide.createIcons();
+        }
+        
+        // Smooth scroll
+        function smoothScrollTo(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        // Función WhatsApp
+        function goToWhatsApp() {
+            const phone = "541135652652";
+            const message = encodeURIComponent("Quiero inscribirme en FuerteEnCristo!");
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Login modal
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+        
+        function hideLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+        
+        function fakeLogin() {
+            hideLoginModal();
+            setTimeout(() => {
+                alert("¡Bienvenido de vuelta, hermano! 🎉 (Esta es una demo)");
+            }, 300);
+        }
+        
+        function scrollToCTA() {
+            const ctaSection = document.querySelector('section.py-20.bg-blue-950');
+            if (ctaSection) {
+                ctaSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Keyboard escape for modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                hideLoginModal();
+            }
+        });
+        
+        // Initialize everything
+        window.onload = function() {
+            initIcons();
+            
+            // Tailwind script is already active via CDN
+            console.log('%cFuerteEnCristo Landing Page cargada con éxito. ¡Gloria a Dios!', 'color: #1e3a8a; font-weight: 600');
+            
+            // Mobile menu button
+            const mobileBtn = document.getElementById('mobile-menu-button');
+            mobileBtn.addEventListener('click', toggleMobileMenu);
+        }
+    </script>
+</body>
+</html>
